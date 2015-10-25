@@ -8,7 +8,7 @@
 
 import UIKit
 import Parse
-class DoneViewController: UIViewController {
+class DoneViewController: UIViewController , UITableViewDataSource, UITableViewDelegate{
 
     var OrderNumber: [Int] = []
     var quantity: [Int] = []
@@ -86,6 +86,9 @@ class DoneViewController: UIViewController {
         
     }
 
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
 
     @IBOutlet weak var tableView: UITableView!
 
