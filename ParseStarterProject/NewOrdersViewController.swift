@@ -113,6 +113,10 @@ class NewOrdersViewController: UIViewController {
         }
         
     }
+    NSTimer.every(2.seconds)
+    {
+        runQuery()
+    }
     /*
     // MARK: - Navigation
 

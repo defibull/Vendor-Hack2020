@@ -112,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let currentOrderVC = CurrentOrderViewController(nibName:"CurrentOrderViewController", bundle:nil);
         let pickupVC = PickupViewController(nibName:"PickupViewController", bundle:nil);
         let completedVC = DoneViewController(nibName:"DoneViewController", bundle:nil)
-        let newOrderVC = NewOrdersViewController(nibName:"PickupViewController", bundle:nil)
+        let newOrderVC = NewOrdersViewController(nibName:"NewOrdersViewController", bundle:nil)
         currentOrderVC.title = "Making"
         pickupVC.title = "Pickup"
         completedVC.title = "Done"

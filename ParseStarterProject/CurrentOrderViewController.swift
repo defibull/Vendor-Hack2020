@@ -74,7 +74,7 @@ class CurrentOrderViewController: UIViewController, UITableViewDataSource, UITab
                         eachObject.incrementKey("IDNumber")
                         eachObject.saveInBackgroundWithBlock{ (success: Bool, error : NSError?) -> Void in }
                         }
-                      counter+=1
+                        counter++
                     }
                 }
             }
@@ -119,6 +119,12 @@ class CurrentOrderViewController: UIViewController, UITableViewDataSource, UITab
         }
         
     }
+    
+    @IBAction func refresh() {
+        self.runQuery()
+    }
+    
+    
     
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        var PickupVC = segue.destinationViewController as! PickupViewController

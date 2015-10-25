@@ -57,6 +57,9 @@ class DoneViewController: UIViewController {
     
     func runQuery()
     {
+        OrderNumber.removeAll()
+        quantity.removeAll()
+        name.removeAll()
         var query = PFQuery(className: "VendorDatabase")
         query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil
@@ -86,4 +89,7 @@ class DoneViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    @IBAction func refresh() {
+        self.runQuery()
+    }
 }

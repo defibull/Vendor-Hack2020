@@ -41,6 +41,14 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LO5-bU-Jhn">
+                    <rect key="frame" x="282" y="25" width="30" height="30"/>
+                    <animations/>
+                    <state key="normal" title="R"/>
+                    <connections>
+                        <action selector="refresh" destination="-1" eventType="touchUpInside" id="EmB-ii-Txb"/>
+                    </connections>
+                </button>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

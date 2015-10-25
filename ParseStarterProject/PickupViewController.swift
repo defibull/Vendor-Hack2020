@@ -111,4 +111,8 @@ class PickupViewController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
+    @IBAction func refresh() {
+        self.runQuery()
+    }
+    
 }
