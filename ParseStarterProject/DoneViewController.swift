@@ -60,7 +60,7 @@ class DoneViewController: UIViewController , UITableViewDataSource, UITableViewD
         OrderNumber.removeAll()
         quantity.removeAll()
         name.removeAll()
-        var query = PFQuery(className: "VendorDatabase")
+        var query = PFQuery(className: "orders")
         query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil
             {
@@ -74,9 +74,9 @@ class DoneViewController: UIViewController , UITableViewDataSource, UITableViewD
                     {
                         if (eachObject["IDNumber"] as! Int) == 3
                         {
-                            self.OrderNumber.append(eachObject["OrderNumber"] as! Int)
-                            self.quantity.append(eachObject["Quantity"] as! Int)
-                            self.name.append(eachObject["Name"] as! String)
+                            self.OrderNumber.append(eachObject["orderNumber"] as! Int)
+                            self.quantity.append(eachObject["quantity"] as! Int)
+                            self.name.append(eachObject["ItemName"] as! String)
                         }
                         self.tableView.reloadData()
                     }

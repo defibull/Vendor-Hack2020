@@ -47,8 +47,8 @@ class NewOrdersViewController: UIViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var breakpoint : Int = indexPath.row
-        var a = 0
-        var query = PFQuery(className: "VendorDatabase")
+        var counter = 0
+        var query = PFQuery(className: "orders")
         query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
             if error != nil
             {
@@ -61,17 +61,12 @@ class NewOrdersViewController: UIViewController {
                 {
                     if eachObject["IDNumber"] as! Int == 0
                     {
-                        if a == breakpoint
-                        {
-                            eachObject.incrementKey("IDNumber")
-                            eachObject.saveInBackgroundWithBlock{ (success: Bool, error : NSError?) -> Void in
+                            if (counter == indexPath.row)
+                            {
+                                eachObject.incrementKey("IDNumber")
+                                eachObject.saveInBackgroundWithBlock{ (success: Bool, error : NSError?) -> Void in }
                             }
-                            break
-                        }
-                        else
-                        {
-                            a++
-                        }
+                            counter++
                     }
                 }
             }
@@ -87,13 +82,12 @@ class NewOrdersViewController: UIViewController {
         OrderNumber.removeAll()
         quantity.removeAll()
         name.removeAll()
-        var query = PFQuery(className: "VendorDatabase")
+        var query = PFQuery(className: "orders")
         query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil
             {
                 if objects == nil
                 {
-                    print("Bhenchod")
                 }
                 else
                 {
@@ -101,9 +95,9 @@ class NewOrdersViewController: UIViewController {
                     {
                         if (eachObject["IDNumber"] as! Int) == 0
                         {
-                            self.OrderNumber.append(eachObject["OrderNumber"] as! Int)
-                            self.quantity.append(eachObject["Quantity"] as! Int)
-                            self.name.append(eachObject["Name"] as! String)
+                            self.OrderNumber.append(eachObject["orderNumber"] as! Int)
+                            self.quantity.append(eachObject["quantity"] as! Int)
+                            self.name.append(eachObject["ItemName"] as! String)
                         }
                     }
                     self.tableView.reloadData()
@@ -113,14 +107,11 @@ class NewOrdersViewController: UIViewController {
         }
         
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    @IBAction func refresh() {
+            self.runQuery()
     }
-    */
+    
 
 }
