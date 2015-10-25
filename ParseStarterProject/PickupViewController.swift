@@ -36,6 +36,40 @@ class PickupViewController: UIViewController, UITableViewDataSource, UITableView
         return OrderNumber.count
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var breakpoint : Int = indexPath.row
+        var a = 0
+        var query = PFQuery(className: "VendorDatabase")
+        query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
+            if error != nil
+            {
+                print(error)
+            }
+            if objects != nil
+            {
+                let objects = objects
+                for eachObject in objects!
+                {
+                    if eachObject["IDNumber"] as! Int == 2
+                    {
+                        if a == breakpoint
+                        {
+                            eachObject.incrementKey("IDNumber")
+                            eachObject.saveInBackgroundWithBlock{ (success: Bool, error : NSError?) -> Void in
+                            }
+                            break
+                        }
+                        else
+                        {
+                            a++
+                        }
+                    }
+                }
+            }
+            self.runQuery()
+        }
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell: CurrentOrderTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! CurrentOrderTableViewCell
@@ -47,6 +81,10 @@ class PickupViewController: UIViewController, UITableViewDataSource, UITableView
     
     func runQuery()
     {
+        
+        OrderNumber.removeAll()
+        quantity.removeAll()
+        name.removeAll()
         var query = PFQuery(className: "VendorDatabase")
         query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil
@@ -57,7 +95,6 @@ class PickupViewController: UIViewController, UITableViewDataSource, UITableView
                 }
                 else
                 {
-                    print ("bc")
                     for eachObject in objects!
                     {
                         if (eachObject["IDNumber"] as! Int) == 2
@@ -66,8 +103,8 @@ class PickupViewController: UIViewController, UITableViewDataSource, UITableView
                             self.quantity.append(eachObject["Quantity"] as! Int)
                             self.name.append(eachObject["Name"] as! String)
                         }
-                        self.tableView.reloadData()
                     }
+                    self.tableView.reloadData()
                 }
             }
         }

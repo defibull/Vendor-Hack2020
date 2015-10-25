@@ -46,15 +46,47 @@ class NewOrdersViewController: UIViewController {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        var breakpoint : Int = indexPath.row
+        var a = 0
+        var query = PFQuery(className: "VendorDatabase")
+        query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
+            if error != nil
+            {
+                print(error)
+            }
+            if objects != nil
+            {
+                let objects = objects
+                for eachObject in objects!
+                {
+                    if eachObject["IDNumber"] as! Int == 0
+                    {
+                        if a == breakpoint
+                        {
+                            eachObject.incrementKey("IDNumber")
+                            eachObject.saveInBackgroundWithBlock{ (success: Bool, error : NSError?) -> Void in
+                            }
+                            break
+                        }
+                        else
+                        {
+                            a++
+                        }
+                    }
+                }
+            }
+            self.runQuery()
     }
-    
+}
     
     
     @IBOutlet weak var tableView: UITableView!
     
     func runQuery()
     {
+        OrderNumber.removeAll()
+        quantity.removeAll()
+        name.removeAll()
         var query = PFQuery(className: "VendorDatabase")
         query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil
@@ -65,7 +97,6 @@ class NewOrdersViewController: UIViewController {
                 }
                 else
                 {
-                    print ("bc")
                     for eachObject in objects!
                     {
                         if (eachObject["IDNumber"] as! Int) == 0
@@ -74,8 +105,9 @@ class NewOrdersViewController: UIViewController {
                             self.quantity.append(eachObject["Quantity"] as! Int)
                             self.name.append(eachObject["Name"] as! String)
                         }
-                        self.tableView.reloadData()
                     }
+                    self.tableView.reloadData()
+
                 }
             }
         }

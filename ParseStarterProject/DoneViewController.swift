@@ -67,7 +67,6 @@ class DoneViewController: UIViewController {
                 }
                 else
                 {
-                    print ("bc")
                     for eachObject in objects!
                     {
                         if (eachObject["IDNumber"] as! Int) == 3

@@ -52,8 +52,35 @@ class CurrentOrderViewController: UIViewController, UITableViewDataSource, UITab
         return cell
     }
     
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        var breakpoint : Int = indexPath.row
+        var  counter = 0
+        var query = PFQuery(className: "VendorDatabase")
+        query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
+            if error != nil
+            {
+                print(error)
+            }
+            if objects != nil
+            {
+                let objects = objects
+                for eachObject in objects!
+                {
+                    if eachObject["IDNumber"] as! Int == 1
+                    {
+                        if (counter == indexPath.row)
+                        {
+                        eachObject.incrementKey("IDNumber")
+                        eachObject.saveInBackgroundWithBlock{ (success: Bool, error : NSError?) -> Void in }
+                        }
+                      counter+=1
+                    }
+                }
+            }
+        }
+        self.runQuery()
+
     }
 
     
@@ -62,6 +89,10 @@ class CurrentOrderViewController: UIViewController, UITableViewDataSource, UITab
 
     func runQuery()
     {
+        
+        OrderNumber.removeAll()
+        quantity.removeAll()
+        name.removeAll()
         var query = PFQuery(className: "VendorDatabase")
         query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil
@@ -72,7 +103,6 @@ class CurrentOrderViewController: UIViewController, UITableViewDataSource, UITab
                 }
                 else
                 {
-                    print ("bc")
                     for eachObject in objects!
                     {
                         if (eachObject["IDNumber"] as! Int) == 1
@@ -81,8 +111,9 @@ class CurrentOrderViewController: UIViewController, UITableViewDataSource, UITab
                             self.quantity.append(eachObject["Quantity"] as! Int)
                             self.name.append(eachObject["Name"] as! String)
                         }
-                        self.tableView.reloadData()
                     }
+                    self.tableView.reloadData()
+
                 }
             }
         }
