@@ -10,12 +10,17 @@ import UIKit
 import Parse
 class DoneViewController: UIViewController {
 
-    
-    var Completed = [String]()
+    var OrderNumber: [Int] = []
+    var quantity: [Int] = []
+    var name: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nib = UINib(nibName: "CurrentOrderTableViewCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: "Cell")
+
         self.queryForCreditCard()
+        runQuery()
         // Do any additional setup after loading the view.
     }
 
@@ -25,12 +30,15 @@ class DoneViewController: UIViewController {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Completed.count
+        return OrderNumber.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell: CurrentOrderTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! CurrentOrderTableViewCell
+        cell.name.text = name[indexPath.row]
+        cell.quantity.text = String(quantity[indexPath.row])
+        cell.orderNumber.text = String(OrderNumber[indexPath.row])
         return cell
     }
     
@@ -46,6 +54,36 @@ class DoneViewController: UIViewController {
             }
         }
     }
+    
+    func runQuery()
+    {
+        var query = PFQuery(className: "VendorDatabase")
+        query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil
+            {
+                if objects == nil
+                {
+                    print("Bhenchod")
+                }
+                else
+                {
+                    print ("bc")
+                    for eachObject in objects!
+                    {
+                        if (eachObject["IDNumber"] as! Int) == 3
+                        {
+                            self.OrderNumber.append(eachObject["OrderNumber"] as! Int)
+                            self.quantity.append(eachObject["Quantity"] as! Int)
+                            self.name.append(eachObject["Name"] as! String)
+                        }
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+        
+    }
+
 
     @IBOutlet weak var tableView: UITableView!
 

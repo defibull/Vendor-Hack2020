@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Parse
+import Bolts
 
 class CurrentOrderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -15,10 +17,15 @@ class CurrentOrderViewController: UIViewController, UITableViewDataSource, UITab
     var itemsInProgress = ["c","d","e"]
     
     
+    var OrderNumber: [Int] = []
+    var quantity: [Int] = []
+    var name: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "CurrentOrderTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "Cell")
+        self.runQuery()
         //self.tableView!.registerClass(CurrentOrderTableViewCell.self, forCellReuseIdentifier: "Cell")
         // Do any additional setup after loading the view.
     }
@@ -29,22 +36,19 @@ class CurrentOrderViewController: UIViewController, UITableViewDataSource, UITab
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 65
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 40
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var itemSize = [itemsInNew.count, itemsInProgress.count]
-        return itemSize[section]
+        return OrderNumber.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell: CurrentOrderTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! CurrentOrderTableViewCell;
-        cell.namely = "Suchit"
+        cell.name.text = name[indexPath.row]
+        cell.quantity.text = String(quantity[indexPath.row])
+        cell.orderNumber.text = String(OrderNumber[indexPath.row])
         return cell
     }
     
@@ -52,12 +56,39 @@ class CurrentOrderViewController: UIViewController, UITableViewDataSource, UITab
         
     }
 
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return a[section]
-    }
+    
 
     @IBOutlet weak var tableView: UITableView!
 
+    func runQuery()
+    {
+        var query = PFQuery(className: "VendorDatabase")
+        query.findObjectsInBackgroundWithBlock{ (objects: [PFObject]?, error: NSError?) -> Void in
+            if error == nil
+            {
+                if objects == nil
+                {
+                    print("Bhenchod")
+                }
+                else
+                {
+                    print ("bc")
+                    for eachObject in objects!
+                    {
+                        if (eachObject["IDNumber"] as! Int) == 1
+                        {
+                            self.OrderNumber.append(eachObject["OrderNumber"] as! Int)
+                            self.quantity.append(eachObject["Quantity"] as! Int)
+                            self.name.append(eachObject["Name"] as! String)
+                        }
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+        
+    }
+    
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        var PickupVC = segue.destinationViewController as! PickupViewController
 //        if let indexPath = self.tableView.indexPathForSelectedRow

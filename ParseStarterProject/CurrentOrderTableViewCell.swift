@@ -9,21 +9,12 @@
 import UIKit
 
 class CurrentOrderTableViewCell: UITableViewCell {
-    
-    var order = 0
-    var namely = String()
-    var ed = String()
-    var quan = 0
+   
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        
-        orderNumber.text = String(order)
-        name.text = namely
-        extraDetails.text = ed
-        quantity.text = String(quan)
         
     }
 
@@ -36,8 +27,6 @@ class CurrentOrderTableViewCell: UITableViewCell {
     @IBOutlet weak var orderNumber: UILabel!
     
     @IBOutlet weak var name: UILabel!
-    
-    @IBOutlet weak var extraDetails: UILabel!
     
     @IBOutlet weak var quantity: UILabel!
     

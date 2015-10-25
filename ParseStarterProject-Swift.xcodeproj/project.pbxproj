@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4777AA5F1BDCE68C009020D3 /* NewOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4777AA5D1BDCE68C009020D3 /* NewOrdersViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		4777AA601BDCE68C009020D3 /* NewOrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4777AA5E1BDCE68C009020D3 /* NewOrdersViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		5C30406E1BDC9BB10092C251 /* CurrentOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3040661BDC9BB10092C251 /* CurrentOrderTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		5C30406F1BDC9BB10092C251 /* CurrentOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C3040671BDC9BB10092C251 /* CurrentOrderTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		5C3040701BDC9BB10092C251 /* CurrentOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3040681BDC9BB10092C251 /* CurrentOrderViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4777AA5D1BDCE68C009020D3 /* NewOrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOrdersViewController.swift; sourceTree = "<group>"; };
+		4777AA5E1BDCE68C009020D3 /* NewOrdersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewOrdersViewController.xib; sourceTree = "<group>"; };
 		5C3040661BDC9BB10092C251 /* CurrentOrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOrderTableViewCell.swift; sourceTree = "<group>"; };
 		5C3040671BDC9BB10092C251 /* CurrentOrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentOrderTableViewCell.xib; sourceTree = "<group>"; };
 		5C3040681BDC9BB10092C251 /* CurrentOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOrderViewController.swift; sourceTree = "<group>"; };
@@ -103,14 +107,16 @@
 			children = (
 				5C3040661BDC9BB10092C251 /* CurrentOrderTableViewCell.swift */,
 				5C3040671BDC9BB10092C251 /* CurrentOrderTableViewCell.xib */,
+				4777AA5D1BDCE68C009020D3 /* NewOrdersViewController.swift */,
+				4777AA5E1BDCE68C009020D3 /* NewOrdersViewController.xib */,
 				5C3040681BDC9BB10092C251 /* CurrentOrderViewController.swift */,
 				5C3040691BDC9BB10092C251 /* CurrentOrderViewController.xib */,
-				5C30406A1BDC9BB10092C251 /* DoneViewController.swift */,
-				5C6C866E1BDCB398009592F3 /* Simplify.bundle */,
-				5C6C866F1BDCB398009592F3 /* Simplify.framework */,
-				5C30406B1BDC9BB10092C251 /* DoneViewController.xib */,
 				5C30406C1BDC9BB10092C251 /* PickupViewController.swift */,
 				5C30406D1BDC9BB10092C251 /* PickupViewController.xib */,
+				5C30406A1BDC9BB10092C251 /* DoneViewController.swift */,
+				5C30406B1BDC9BB10092C251 /* DoneViewController.xib */,
+				5C6C866E1BDCB398009592F3 /* Simplify.bundle */,
+				5C6C866F1BDCB398009592F3 /* Simplify.framework */,
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				5C6C866C1BDCA6CF009592F3 /* LaunchScreen.storyboard */,
 			);
@@ -204,6 +210,7 @@
 				5C30406F1BDC9BB10092C251 /* CurrentOrderTableViewCell.xib in Resources */,
 				5C3040751BDC9BB10092C251 /* PickupViewController.xib in Resources */,
 				5C6C86701BDCB398009592F3 /* Simplify.bundle in Resources */,
+				4777AA601BDCE68C009020D3 /* NewOrdersViewController.xib in Resources */,
 				5C6C866D1BDCA6CF009592F3 /* LaunchScreen.storyboard in Resources */,
 				5C3040851BDCA2C60092C251 /* Info.plist in Resources */,
 				5C3040711BDC9BB10092C251 /* CurrentOrderViewController.xib in Resources */,
@@ -234,6 +241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4777AA5F1BDCE68C009020D3 /* NewOrdersViewController.swift in Sources */,
 				5C30406E1BDC9BB10092C251 /* CurrentOrderTableViewCell.swift in Sources */,
 				5C3040741BDC9BB10092C251 /* PickupViewController.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
